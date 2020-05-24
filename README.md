@@ -11,3 +11,8 @@ Modified version of [The Round Table (v2.1.2)](https://www.digitalcombatsimulato
 [Lua Users Wiki _(top level)_](http://lua-users.org/wiki/LuaDirectory)  
 **Miscellaneous**  
 [Online Lua Compiler](https://repl.it/languages/lua) > _Great for quickly testing code, can also collaborate simultaneously together_  
+**Text Editing Software**  
+[Notepad++](https://notepad-plus-plus.org/) > _Very powerful and versatile text editor_  
+[Atom](https://atom.io/) > _Another text editor, has Git support_  
+[VS Code](https://code.visualstudio.com/) > _Basically lightweight version of Visual Studio, very extensible_  
+[Eclipse IDE](https://www.eclipse.org/downloads/) > _Popular text editor with IDE support, recommended by the MOOSE documentation_
