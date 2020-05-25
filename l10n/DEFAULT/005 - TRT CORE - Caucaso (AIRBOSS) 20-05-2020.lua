@@ -1118,9 +1118,9 @@ if ( SFX_Misc == 1 ) then
   end
 end
 --FIN---------------------------------------------------------------------------------------------------------------------------------------------------------------
-SFX_Misc = 1
-RadioAmbienteActivada_AA = 1
-RadioAmbienteActivada_AG = 1
+SFX_Misc = 0
+RadioAmbienteActivada_AA = 0
+RadioAmbienteActivada_AG = 0
 _SETTINGS:SetA2A_BRAA()
 _SETTINGS:SetA2G_LL_DDM()
 -------------------------
@@ -1128,7 +1128,7 @@ _SETTINGS:SetA2G_LL_DDM()
 -------------------------
 
 TRTOpciones = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Mission Options", nil)
-TRTOpcionesSonido = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Sound Options", TRTOpciones, nil)
+--TRTOpcionesSonido = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Sound Options", TRTOpciones, nil)
 TRTCurrentMissionSettings = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Current Mission Settings", TRTOpciones, function() CurrentMissionSettings() end, nil)
 TRTCurrentSQDN = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Active SQDN List", TRTOpciones, function() CurrentCAPSettings() end, nil)
 if allow_EndMissionViaRadio == true then
@@ -1137,9 +1137,9 @@ TRTOpcionesENDMISSIONconfirm1 = missionCommands.addSubMenuForCoalition(coalition
 TRTOpcionesENDMISSION2 = missionCommands.addCommandForCoalition(coalition.side.BLUE, "YES! get me outta here", TRTOpcionesENDMISSIONconfirm1, function() ENDMISSIONTRIGGER() end, nil)
 TRTOpcionesENDMISSION3 = missionCommands.addCommandForCoalition(coalition.side.BLUE, "NO!, changed my mind", TRTOpcionesENDMISSIONconfirm1, function() ENDMISSIONTRIGGERNO() end, nil)
 end
-TRTOpcionesRadioChatA2A = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle A2A kills comms", TRTOpcionesSonido, function() DesactivarRadioAmbienteAA() end, nil)
-TRTOpcionesRadioChatA2G = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle A2G kills comms", TRTOpcionesSonido, function() DesactivarRadioAmbienteAG() end, nil)
-TRTOpcionesMiscSFX = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle misc SFX", TRTOpcionesSonido, function() DesactivarSFXMisc() end, nil)
+--TRTOpcionesRadioChatA2A = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle A2A kills comms", TRTOpcionesSonido, function() DesactivarRadioAmbienteAA() end, nil)
+--TRTOpcionesRadioChatA2G = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle A2G kills comms", TRTOpcionesSonido, function() DesactivarRadioAmbienteAG() end, nil)
+--TRTOpcionesMiscSFX = missionCommands.addCommandForCoalition(coalition.side.BLUE, "Toggle misc SFX", TRTOpcionesSonido, function() DesactivarSFXMisc() end, nil)
 if allow_CallSupportViaRadio == true then
 TRTOpcionesSoporte = missionCommands.addSubMenuForCoalition(coalition.side.BLUE, "Call Support", TRTOpciones, nil)
 TRTOpcionesSoporteF14CAS = missionCommands.addCommandForCoalition(coalition.side.BLUE, "CAS F-14", TRTOpcionesSoporte, function() CASF14() end, nil)
@@ -1289,5 +1289,3 @@ end
 trigger.action.outText("▁ ▂ ▄ ▅ ▆ ▇ █ THE ROUND TABLE █ ▇ ▆ ▅ ▄ ▂ ▁", 90)
 trigger.action.outText("EN: CHECK YOUR MISSION CONFIG VIA RADIO MENU: Mission Options > Current Mission Settings & Mission Options > Active SQDN List -", 30)
 trigger.action.outText("EN: DON'T DESTROY GROUND UNITS WITHOUT JOINING A TASK OR THEY WONT REGENERATE - JOIN TAKS, ALWAYS -", 30)
-trigger.action.outText("ES: REVISA TU CONFIGURACION CON EL MENÚ DE RADIO: Mission Options > Current Mission Settings & Mission Options > Active SQDN List -", 30)
-trigger.action.outText("ES: NO ELIMINES UNIDADES TERRESTRES SIN UNIRTE A UNA TAREA O NO SE REGENERARAN - UNETE A LAS TAREAS, SIEMPRE -", 30)

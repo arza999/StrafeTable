@@ -95,7 +95,7 @@ end
 -- CONFIG
 JTAC_maxDistance = 5000 -- How far a JTAC can "see" in meters (with LOS)
 
-JTAC_smokeOn = true -- enables marking of target with smoke, can be overriden by the JTACAutoLase in editor
+JTAC_smokeOn = false -- enables marking of target with smoke, can be overriden by the JTACAutoLase in editor
 
 JTAC_smokeColour = 1 -- Green = 0 , Red = 1, White = 2, Orange = 3, Blue = 4
 
