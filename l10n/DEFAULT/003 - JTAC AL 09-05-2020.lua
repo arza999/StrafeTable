@@ -520,9 +520,7 @@ function getJTACStatus(groupId)
         jtacUnit = Unit.getByName(jtacUnitName)
 
         if jtacUnit ~= nil and jtacUnit:getLife() > 0 and jtacUnit:isActive() == true then
-
             local enemyUnit = getCurrentUnit(jtacUnit, jtacGroupName)
-
             local laserCode =  GLOBAL_JTAC_LASER_CODES[jtacGroupName]
 
             if laserCode == nil then
@@ -532,13 +530,11 @@ function getJTACStatus(groupId)
             if enemyUnit ~= nil and enemyUnit:getLife() > 0 and enemyUnit:isActive() == true then
                 -- Add some spacing between the group name and the ID number
                 local fixedJTACGroupName = jtacGroupName:gsub("#", " #")
-
                 message = message .. "" .. fixedJTACGroupName .. " | Laser Code: ".. laserCode .." | Target: " .. enemyUnit:getTypeName().. getPositionString(enemyUnit) .. heightString(enemyUnit) .. "\n"
             end
         end
     end
-
-    notify(message, 180, groupId)
+    notify(message, 45, groupId)
 end
 
 
