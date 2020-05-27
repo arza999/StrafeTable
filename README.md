@@ -1,5 +1,5 @@
 # StrafeTable
-Modified version of [The Round Table (v2.1.2)](https://www.digitalcombatsimulator.com/en/files/3306210/).
+Modified version of [The Round Table (v2.1.2)](https://www.digitalcombatsimulator.com/en/files/3306210/). This modified version is meant for private usage on Strafe Haven DCS server - not for redistribution!
 
 # Useful Links
 **DCS Mission Scripting**  
