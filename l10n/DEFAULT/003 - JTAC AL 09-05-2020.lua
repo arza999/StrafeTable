@@ -207,14 +207,17 @@ function JTACAutoLase(jtacGroupName, laserCode,smoke,lock,colour)
 
             -- store current target for easy lookup
             GLOBAL_JTAC_CURRENT_TARGETS[jtacGroupName] = { name = enemyUnit:getName(), unitType = enemyUnit:getTypeName(), unitId = enemyUnit:getID() }
+            
+            -- Add some spacing between the group name and the ID number
+            local fixedJTACGroupName = jtacGroupName:gsub("#", " #")
 
-             notify(jtacGroupName .. '. LSR: ' .. laserCode .. " - New Target: " .. enemyUnit:getTypeName() .. getPositionString(enemyUnit) .. heightString(enemyUnit) , 10)
+            notify(fixedJTACGroupName .. ' | Laser Code: ' .. laserCode .. " | New Target: " .. enemyUnit:getTypeName() .. getPositionString(enemyUnit) .. heightString(enemyUnit) , 10)
 
             -- create smoke
             if smoke == true then
 
                 --create first smoke
-                createSmokeMarker(enemyUnit,colour)
+                --createSmokeMarker(enemyUnit,colour)
             end
         end
     end
@@ -233,7 +236,7 @@ function JTACAutoLase(jtacGroupName, laserCode,smoke,lock,colour)
             --recreate smoke marker after 5 mins
             if nextSmokeTime ~= nil and nextSmokeTime < timer.getTime() then
 
-                createSmokeMarker(enemyUnit, colour)
+                --createSmokeMarker(enemyUnit, colour)
             end
         end
 
@@ -303,11 +306,11 @@ end
 function createSmokeMarker(enemyUnit,colour)
 
     --recreate in 5 mins
-    GLOBAL_JTAC_SMOKE[enemyUnit:getName()] = timer.getTime() + 300.0
+    --GLOBAL_JTAC_SMOKE[enemyUnit:getName()] = timer.getTime() + 300.0
 
     -- move smoke 2 meters above target for ease
-    local enemyPoint = enemyUnit:getPoint()
-    trigger.action.smoke({ x = enemyPoint.x, y = enemyPoint.y + 2.0, z = enemyPoint.z }, colour)
+    --local enemyPoint = enemyUnit:getPoint()
+    --trigger.action.smoke({ x = enemyPoint.x, y = enemyPoint.y + 2.0, z = enemyPoint.z }, colour)
 end
 
 function cancelLase(jtacGroupName)
@@ -774,7 +777,7 @@ function getJTACStatus(groupId)
     local jtacUnit = nil
     local jtacUnitName = nil
 
-    local message = "AVAILABLE JTAC TARGETS: \n\n"
+    local message = "Available JTAC Targets: \n\n"
 
     for jtacGroupName, jtacUnitName in pairs(GLOBAL_JTAC_UNITS) do
 
@@ -792,14 +795,11 @@ function getJTACStatus(groupId)
             end
 
             if enemyUnit ~= nil and enemyUnit:getLife() > 0 and enemyUnit:isActive() == true then
-           -- original     message = message .. "" .. jtacGroupName .. ":\nTGT: " .. enemyUnit:getTypeName().. " | LSR: ".. laserCode .. getPositionString(enemyUnit) .. "\n"
-             --   message = message .. "" .. jtacGroupName .. " LSR: ".. laserCode .."\nTGT: " .. enemyUnit:getTypeName().. getPositionString(enemyUnit) .. "\n"
-                message = message .. "" .. jtacGroupName .. " LSR: ".. laserCode .." - TGT: " .. enemyUnit:getTypeName().. getPositionString(enemyUnit) .. heightString(enemyUnit) .. "\n"
+                -- Add some spacing between the group name and the ID number
+                local fixedJTACGroupName = jtacGroupName:gsub("#", " #")
 
--- MADE THIS SO IT DOESNT SHOW EMPTY JTACS           
-
-		   -- else
-                 --ORIGINAL message = message .. "" .. jtacGroupName .. " -No targets currently available-" .. getPositionString(jtacUnit) .."\n"	
+                --message = message .. "" .. newJTACGroupName .. " Laser Code: ".. laserCode .." - TGT: " .. enemyUnit:getTypeName().. getPositionString(enemyUnit) .. heightString(enemyUnit) .. "\n"
+                message = message .. "" .. fixedJTACGroupName .. " | Laser Code: ".. laserCode .." | Target: " .. enemyUnit:getTypeName().. getPositionString(enemyUnit) .. heightString(enemyUnit) .. "\n"
             end
         end
     end
@@ -865,28 +865,6 @@ function isVehicle(unit)
     return true
 
 end
-    
-
--- function getPositionString(unit)
-
-    -- if JTAC_location == false then
-        -- return ""
-    -- end
-
-	-- local latLngStr = latLngString(unit,3)
-
--- -- local _lat, _lon = coord.LOtoLL(_unit:getPosition().p)
-
--- -- local latLngStr = mist.tostringLL(_lat, _lon, 0, true)
-
-	-- local mgrsString = MGRSString(coord.LLtoMGRS(coord.LOtoLL(unit:getPosition().p)),5)
-
-	-- --return "| @" .. latLngStr .. "\n \n"--.. " -MGRS "..mgrsString
-		-- return " | L/L: " .. latLngStr .. " | MGRS: "..mgrsString.."\n \n"
-	-- --return " | @ MGRS: "..mgrsString
-
--- end
-
 
 function getPositionString(unit)
 
@@ -895,13 +873,23 @@ function getPositionString(unit)
     end
 
     local lat, lon = coord.LOtoLL(unit:getPosition().p)
-
-    local latLngStr = mist.tostringLL(lat, lon, 3, location_DMS)
-
+    local coordLLDMS = mist.tostringLL(lat, lon, 0, location_DMS)
+    local coordLLDDM = mist.tostringLL(lat, lon, 3)
+    local coordLLDMSDS = mist.tostringLL(lat, lon, 2, location_DMS)
     local mgrsString = mist.tostringMGRS(coord.LLtoMGRS(coord.LOtoLL(unit:getPosition().p)), 5)
 
  --   return " | L/L: " .. latLngStr .. " | MGRS: "..mgrsString.." "
-    return "\nL/L DMS: " .. latLngStr .. " | MGRS: "..mgrsString.." "
+    --return "\nL/L DMS: " .. latLngStr .. " | MGRS: "..mgrsString.." "
+        --_SETTINGS:SetLL_Accuracy(0)
+        --CoordStringLLDMS = unit:ToStringLLDMS(SETTINGS:SetImperial())
+        --_SETTINGS:SetLL_Accuracy(3)
+        --CoordStringLLDDM = unit:ToStringLLDDM(SETTINGS:SetImperial())
+        --_SETTINGS:SetLL_Accuracy(2)
+        --CoordStringLLDMSDS = unit:ToStringLLDMSDS(SETTINGS:SetImperial())
+
+        --return "Target Coordinates\n".."LLDMS: "..CoordStringLLDMS.."\n LLDDM: "..CoordStringLLDDM.."\n LLDMSDS: "..CoordStringLLDMSDS.."\n MGSRS: "..mgrsString
+        return "\nTarget Coordinates\n".."LLDMS: "..coordLLDMS.."\nLLDDM: "..coordLLDDM.."\nLLDMSDS: "..coordLLDMSDS.."\nMGSRS: "..mgrsString
+        --trigger.action.outTextForGroup(ClientGroupID, "Target Report For "..ClientPlayerName.."\n".."\n"..AGMissionBriefingText.."\n"..BRMessage.."\n"..SZMessage.."\n"..CoordStringLLDMS.."\n"..CoordStringLLDDM.."\n"..CoordStringLLDMSDS.."\n"..ELEMessage, 30)
 end
 
 -- source of Function MIST - https://github.com/mrSkortch/MissionScriptingTools/blob/master/mist.lua
@@ -974,7 +962,7 @@ function heightString(unit)
 	local heightMetersRounded = roundNumber(heightMeters, 0)
 	local heightFeetRounded = roundNumber(heightMeters * 3.28084, 0)
 --	return string.format('ELEV: %dm / %dft', heightMetersRounded, heightFeetRounded)
-	return string.format('| ELEV: %dft\n \n', heightFeetRounded)
+	return string.format(' | ELEV: %dft\n \n', heightFeetRounded)
 end
 
 -- From http://lua-users.org/wiki/SimpleRound

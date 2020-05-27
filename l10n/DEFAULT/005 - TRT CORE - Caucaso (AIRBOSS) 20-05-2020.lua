@@ -315,7 +315,7 @@ if enable_A2G_tasking == true then
         function(SpawnGroup)
         local location1 = SpawnGroup:GetCoordinate() --get the Coordinate of the random spawn 
         local newlocation1 = location1:GetRandomVec2InRadius(10, 50) --make a new coord close by. Limitations of map and zone should be considered
-        BAIJTAC = SPAWN:NewWithAlias( "jtac", "jtac  BAI-" .. RngNum):SpawnFromVec2(newlocation1) 
+        BAIJTAC = SPAWN:NewWithAlias( "jtac", "JTAC BAI" .. RngNum):SpawnFromVec2(newlocation1) 
         BAIJTACName = BAIJTAC:GetName()
         JTACAutoLase(BAIJTACName, 1688, true, "all", RngCol)
       end)
@@ -343,7 +343,7 @@ if enable_A2G_tasking == true then
         function(SpawnGroup)
         local location2 = SpawnGroup:GetCoordinate() --get the Coordinate of the random spawn 
         local newlocation2 = location2:GetRandomVec2InRadius(10, 50) --make a new coord close by. Limitations of map and zone should be considered
-        BAIHARDJTAC = SPAWN:NewWithAlias( "jtac", "jtac  BAI (hard)-" .. RngNum):SpawnFromVec2(newlocation2)
+        BAIHARDJTAC = SPAWN:NewWithAlias( "jtac", "JTAC BAI" .. RngNum):SpawnFromVec2(newlocation2)
         BAIHardJTACName = BAIHARDJTAC:GetName()
         JTACAutoLase(BAIHardJTACName, 1688, true, "all", RngCol)	
       end)
@@ -390,7 +390,7 @@ if enable_A2G_tasking == true then
         function(SpawnGroup)
         local location1 = SpawnGroup:GetCoordinate() --get the Coordinate of the random spawn 
         local newlocation1 = location1:GetRandomVec2InRadius(10, 50) --make a new coord close by. Limitations of map and zone should be considered
-        SEADJTAC = SPAWN:NewWithAlias( "jtac", "jtac  SEAD-" .. RngNum):SpawnFromVec2(newlocation1) 
+        SEADJTAC = SPAWN:NewWithAlias( "jtac", "JTAC SEAD" .. RngNum):SpawnFromVec2(newlocation1) 
         SEADJTACName = SEADJTAC:GetName()
         JTACAutoLase(SEADJTACName, 1688, true, "all", RngCol)
       end)
